@@ -160,13 +160,15 @@ class SwipeablePanel extends Component {
       style,
       closeRootStyle,
       closeIconStyle,
-      barStyle
+      barStyle,
+      activeUnderlay
     } = this.props;
 
     let {opacity} = noBackgroundOpacity ? "transparent" : this.state;
 
     return showComponent ? (
       <Animated.View
+      pointerEvents={activeUnderlay ? "box-none" : null}
         style={[
           SwipeablePanelStyles.background,
           {
@@ -226,6 +228,7 @@ class SwipeablePanel extends Component {
 }
 
 SwipeablePanel.propTypes = {
+  activeUnderlay: PropTypes.bool,
   isActive: PropTypes.bool.isRequired,
   onClose: PropTypes.func,
   showCloseButton: PropTypes.bool,

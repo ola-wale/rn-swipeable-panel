@@ -163,7 +163,7 @@ class SwipeablePanel extends Component {
       barStyle
     } = this.props;
 
-    let {opacity} = this.state
+    let {opacity} = noBackgroundOpacity ? "transparent" : this.state;
 
     return showComponent ? (
       <Animated.View

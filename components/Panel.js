@@ -207,6 +207,7 @@ class SwipeablePanel extends Component {
             />
           )}
           <ScrollView
+            {...this.props.scrollViewProps}
             onTouchStart={() => {
               return false;
             }}
@@ -246,7 +247,8 @@ SwipeablePanel.propTypes = {
   onlySmall: PropTypes.bool,
   openLarge: PropTypes.bool,
   barStyle: PropTypes.object,
-  noBar: PropTypes.bool
+  noBar: PropTypes.bool,
+  scrollViewProps: PropTypes.object
 };
 
 SwipeablePanel.defaultProps = {
@@ -261,7 +263,8 @@ SwipeablePanel.defaultProps = {
   showCloseButton: false,
   noBar: false,
   closeOnTouchOutside: false,
-  barStyle: {}
+  barStyle: {},
+  scrollViewProps: {}
 };
 
 const SwipeablePanelStyles = StyleSheet.create({

@@ -18,7 +18,7 @@ import PropTypes from "prop-types";
 
 const FULL_HEIGHT = Dimensions.get("window").height;
 const FULL_WIDTH = Dimensions.get("window").width;
-const PANEL_HEIGHT = FULL_HEIGHT - 100;
+const PANEL_HEIGHT = FULL_HEIGHT - 100; //
 
 const LARGE_HEIGHT = FULL_HEIGHT - 400;
 
@@ -43,6 +43,7 @@ class SwipeablePanel extends Component {
     this.pan = new Animated.ValueXY({ x: 0, y: FULL_HEIGHT });
     this.isClosing = false;
 
+    if (!this.props.onlySmall) {
     this._panResponder = PanResponder.create({
       onStartShouldSetPanResponder: (evt, gestureState) => true,
       onPanResponderGrant: (evt, gestureState) => {
@@ -78,6 +79,9 @@ class SwipeablePanel extends Component {
         }
       }
     });
+  } else {
+    this._panResponder = {}
+  }
   }
 
   componentDidMount = () => {
@@ -194,7 +198,7 @@ class SwipeablePanel extends Component {
           ]}
           {...this._panResponder.panHandlers}
         >
-          {!this.props.noBar && <Bar barStyle={barStyle} />}
+          {!this.props.noBar && !this.props.onlySmall && <Bar barStyle={barStyle} />}
           {this.props.showCloseButton && (
             <Close
               rootStyle={closeRootStyle}
@@ -239,6 +243,7 @@ SwipeablePanel.propTypes = {
   closeIconStyle: PropTypes.object,
   closeOnTouchOutside: PropTypes.bool,
   onlyLarge: PropTypes.bool,
+  onlySmall: PropTypes.bool,
   openLarge: PropTypes.bool,
   barStyle: PropTypes.object,
   noBar: PropTypes.bool
@@ -252,6 +257,7 @@ SwipeablePanel.defaultProps = {
   closeIconStyle: {},
   openLarge: false,
   onlyLarge: false,
+  onlySmall: false,
   showCloseButton: false,
   noBar: false,
   closeOnTouchOutside: false,

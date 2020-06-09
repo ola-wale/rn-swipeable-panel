@@ -157,6 +157,10 @@ class SwipeablePanel extends Component {
     }
   };
 
+  openLarge() {
+    this._animateTo(STATUS.LARGE);
+  }
+
   render() {
     const { showComponent } = this.state;
     const {
